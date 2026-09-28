@@ -50,7 +50,8 @@ export default function Navbar() {
 
         <nav className={`nav-links ${isMenuOpen ? 'mobile-open' : ''}`}>
           <Link href="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>{lang === 'en' ? 'Home' : 'الرئيسية'}</Link>
-          <Link href="#services" className="nav-link" onClick={() => setIsMenuOpen(false)}>{lang === 'en' ? 'Services' : 'الخدمات'}</Link>
+          <Link href="/#services" className="nav-link" onClick={() => setIsMenuOpen(false)}>{lang === 'en' ? 'Services' : 'الخدمات'}</Link>
+          <Link href="/trips" className="nav-link" onClick={() => setIsMenuOpen(false)}>{lang === 'en' ? 'Trips & Offers' : 'الرحلات والعروض'}</Link>
 
           <button onClick={handleToggle} className={`lang-toggle-pill ${sliderLang}`}>
             <div className="slider"></div>

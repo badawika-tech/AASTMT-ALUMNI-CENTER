@@ -1,7 +1,9 @@
 'use client'
 import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { useLanguage } from '@/components/LanguageContext'
 import AnimatedDoodles from '@/components/AnimatedDoodles'
+import { tripsData } from '@/data/tripsData'
 
 const Icons = {
   Partnership: () => (
@@ -754,41 +756,99 @@ export default function Home() {
               </div>
             ) : activeModalKey === 'trips' ? (
               <div className="trips-details" style={{ animation: 'fadeIn 0.3s ease' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '24px' }}>
-                  <div className="syn-logo"><Icons.Trips /></div>
-                  <div>
-                    <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-main)' }}>{lang === 'ar' ? 'رحلات وعروض' : 'Trips & Offers'}</h3>
-                    <p style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{lang === 'ar' ? 'رحلة أمستردام وبروكسل' : 'Amsterdam and Brussels Trip'}</p>
-                  </div>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '32px' }}>
-                  <div style={{ padding: '24px', background: 'var(--bg-color)', borderRadius: '16px', border: 'var(--modern-border)' }}>
-                    <h4 style={{ fontWeight: 800, fontSize: '1.4rem', color: 'var(--primary)', marginBottom: '20px' }}>
-                      {lang === 'ar' ? 'رحلة أمستردام وبروكسل' : 'Trip to Amsterdam and Brussels'}
-                    </h4>
-
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                      <div style={{ padding: '16px', background: 'white', borderRadius: '12px', border: 'var(--modern-border)' }}>
-                        <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '4px', fontWeight: 600 }}>{lang === 'ar' ? 'تاريخ الرحلة' : 'Date'}</div>
-                        <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-main)' }}>25 {lang === 'ar' ? 'يناير' : 'Jan'}</div>
-                      </div>
-                      <div style={{ padding: '16px', background: 'white', borderRadius: '12px', border: 'var(--modern-border)' }}>
-                        <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '4px', fontWeight: 600 }}>{lang === 'ar' ? 'المدة' : 'Duration'}</div>
-                        <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-main)' }}>07 {lang === 'ar' ? 'أيام' : 'Days'}</div>
-                      </div>
-                    </div>
-
-                    <div style={{ marginTop: '16px', padding: '16px', background: 'white', borderRadius: '12px', border: 'var(--modern-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <div>
-                        <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '4px', fontWeight: 600 }}>{lang === 'ar' ? 'سعر الرحلة' : 'Price'}</div>
-                        <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--primary)' }}>900$ <span style={{ fontSize: '1.1rem', color: 'var(--text-muted)' }}>+ 27,000 EGP</span></div>
-                      </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px', marginBottom: '24px', flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                    <div className="syn-logo"><Icons.Trips /></div>
+                    <div>
+                      <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-main)' }}>{lang === 'ar' ? 'رحلات وعروض' : 'Trips & Offers'}</h3>
+                      <p style={{ color: 'var(--text-muted)', fontWeight: 500 }}>{lang === 'ar' ? 'جميع باقات السفر والعمرة المتاحة لخريجي الأكاديمية' : 'All available travel & Umrah packages for alumni'}</p>
                     </div>
                   </div>
+                  <Link
+                    href="/trips"
+                    onClick={() => setActiveModalKey(null)}
+                    className="trip-btn-details"
+                    style={{ padding: '10px 18px', fontSize: '0.9rem' }}
+                  >
+                    {lang === 'ar' ? 'عرض كافة الرحلات في صفحة مخصصة ↗' : 'View All Trips on Dedicated Page ↗'}
+                  </Link>
                 </div>
-                <div style={{ padding: '24px', background: 'var(--bg-color)', borderRadius: '16px', border: 'var(--modern-border)' }}>
+
+                <div className="trips-modal-list">
+                  {tripsData.map((trip) => (
+                    <div key={trip.id} className="trip-modal-card">
+                      <div className="trip-modal-card-header">
+                        <div>
+                          <span className={`trip-badge ${trip.category}`}>
+                            {trip.badge[lang]}
+                          </span>
+                          <h4 style={{ fontWeight: 800, fontSize: '1.3rem', color: 'var(--primary)', marginTop: '8px' }}>
+                            {trip.title[lang]}
+                          </h4>
+                          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '2px' }}>
+                            {trip.destination[lang]}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="trip-modal-grid">
+                        <div className="trip-modal-stat-box">
+                          <div className="trip-modal-stat-label">{lang === 'ar' ? 'تاريخ الرحلة' : 'Date'}</div>
+                          <div className="trip-modal-stat-val">{trip.date[lang]}</div>
+                        </div>
+                        <div className="trip-modal-stat-box">
+                          <div className="trip-modal-stat-label">{lang === 'ar' ? 'المدة' : 'Duration'}</div>
+                          <div className="trip-modal-stat-val">{trip.duration[lang]}</div>
+                        </div>
+                      </div>
+
+                      <div className="trip-modal-price-box">
+                        <div>
+                          <div className="trip-modal-stat-label">{lang === 'ar' ? 'سعر الرحلة' : 'Price'}</div>
+                          <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--primary)' }}>
+                            {trip.priceSummary[lang]}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="trip-modal-actions">
+                        <Link
+                          href={`/trips/${trip.id}`}
+                          onClick={() => setActiveModalKey(null)}
+                          className="trip-btn-details"
+                        >
+                          {lang === 'ar' ? 'تفاصيل الرحلة' : 'Trip Details'}
+                          <span style={{ transform: lang === 'ar' ? 'rotate(180deg)' : 'none', display: 'inline-flex' }}>
+                            <Icons.ArrowRight />
+                          </span>
+                        </Link>
+
+                        <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+                          <a
+                            href={`tel:${trip.bookingInfo.phones[0]}`}
+                            className="trip-btn-phone"
+                            style={{ padding: '10px 16px' }}
+                          >
+                            <Icons.Phone /> {trip.bookingInfo.phones[0]}
+                          </a>
+                          <a
+                            href={`https://wa.me/${trip.bookingInfo.whatsapp}?text=${encodeURIComponent(lang === 'ar' ? `مرحباً، أود الاستفسار عن ${trip.title.ar}` : `Hello, I would like to inquire about ${trip.title.en}`)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="trip-btn-whatsapp"
+                            style={{ padding: '10px 16px' }}
+                          >
+                            <Icons.WhatsApp /> WhatsApp
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div style={{ marginTop: '32px', padding: '24px', background: 'var(--bg-color)', borderRadius: '16px', border: 'var(--modern-border)' }}>
                   <p style={{ fontWeight: 700, color: 'var(--text-main)', marginBottom: '16px' }}>
-                    {lang === 'ar' ? 'لمزيد من التفاصيل والحجز، يرجى التواصل على:' : 'For more details & reservations, please contact:'}
+                    {lang === 'ar' ? 'لمزيد من التفاصيل والاستفسارات، يرجى التواصل على:' : 'For more details & inquiries, please contact:'}
                   </p>
                   <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
                     <a href="tel:01024982244" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 700, color: 'var(--primary)', textDecoration: 'none', background: 'white', padding: '12px 20px', borderRadius: '12px', border: 'var(--modern-border)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
