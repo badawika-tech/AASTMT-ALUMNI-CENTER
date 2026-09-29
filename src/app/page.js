@@ -542,7 +542,6 @@ export default function Home() {
               {t.services.map((service, idx) => {
                 const isInternal = service.href && service.href.startsWith('/');
                 const linkProps = {
-                  key: idx,
                   className: `bento-item ${service.className}`,
                   onClick: (e) => {
                     if (service.action) {
@@ -573,7 +572,7 @@ export default function Home() {
 
                 if (isInternal) {
                   return (
-                    <Link href={service.href} {...linkProps}>
+                    <Link key={idx} href={service.href} {...linkProps}>
                       {content}
                     </Link>
                   );
@@ -581,6 +580,7 @@ export default function Home() {
 
                 return (
                   <a
+                    key={idx}
                     href={service.href || '#'}
                     target={service.href ? "_blank" : undefined}
                     rel={service.href ? "noopener noreferrer" : undefined}

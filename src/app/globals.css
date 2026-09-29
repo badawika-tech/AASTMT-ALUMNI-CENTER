@@ -185,7 +185,7 @@ html[lang="ar"] body {
 .brutal-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: 280px;
+  grid-auto-rows: minmax(280px, auto);
   gap: 24px;
 }
 
@@ -252,6 +252,7 @@ html[lang="ar"] body {
 @media (max-width: 640px) {
   .brutal-grid {
     grid-template-columns: 1fr;
+    grid-auto-rows: minmax(200px, auto);
   }
 
   .bento-item.span-4,
@@ -1016,7 +1017,7 @@ html[lang="ar"] body {
 
 .trips-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
   gap: 28px;
 }
 
@@ -1145,7 +1146,7 @@ html[lang="ar"] body {
 
 .trip-detail-stats-bar {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
   gap: 16px;
   margin-top: 12px;
   padding-top: 24px;
@@ -1318,7 +1319,7 @@ html[lang="en"] .trip-table {
 
 .booking-steps-box {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
   gap: 16px;
   margin: 20px 0 28px;
 }
@@ -1435,6 +1436,10 @@ html[lang="en"] .trip-table {
   }
 
   .trip-detail-stats-bar {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .trip-card-meta {
+    grid-template-columns: 1fr;
   }
 }

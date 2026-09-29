@@ -268,7 +268,7 @@ export default function TripDetailClient({ trip, allTrips }) {
                   <Icons.Tag />
                   {lang === 'ar' ? 'تفاصيل السعر وتوزيع العملات' : 'Price Structure'}
                 </h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '16px' }}>
                   {trip.priceDetail.breakdown.map((item, idx) => (
                     <div key={idx} style={{ padding: '20px', background: 'var(--bg-color)', borderRadius: '16px', border: 'var(--modern-border)' }}>
                       <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600, marginBottom: '6px' }}>
