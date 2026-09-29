@@ -371,7 +371,7 @@ const translations = {
         desc: 'Bespoke travel packages and special seasonal offers.',
         icon: <Icons.Trips />,
         className: 'span-8',
-        action: 'trips'
+        href: '/trips'
       },
       {
         title: 'Career Opportunities',
@@ -441,7 +441,7 @@ const translations = {
         desc: 'باقات سفر وعروض موسمية خاصة.',
         icon: <Icons.Trips />,
         className: 'span-8',
-        action: 'trips'
+        href: '/trips'
       },
       {
         title: 'فرص عمل',
@@ -539,36 +539,57 @@ export default function Home() {
         <section id="services" className="bento-section">
           <div className="container">
             <div className="brutal-grid">
-              {t.services.map((service, idx) => (
-                <a
-                  href={service.href || `#`}
-                  target={service.href ? "_blank" : undefined}
-                  rel={service.href ? "noopener noreferrer" : undefined}
-                  key={idx}
-                  className={`bento-item ${service.className}`}
-                  onClick={(e) => {
+              {t.services.map((service, idx) => {
+                const isInternal = service.href && service.href.startsWith('/');
+                const linkProps = {
+                  key: idx,
+                  className: `bento-item ${service.className}`,
+                  onClick: (e) => {
                     if (service.action) {
                       e.preventDefault();
                       setActiveModalKey(service.action);
                     }
-                  }}
-                >
-                  <div className="icon-wrapper">
-                    {service.icon}
-                  </div>
-                  <div className="card-content">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' }}>
-                      <h3 className="card-title">{service.title}</h3>
-                      {service.isSoon && (
-                        <span style={{ background: 'var(--accent)', color: 'white', fontSize: '0.7rem', fontWeight: 800, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '0.5px', marginTop: '2px' }}>
-                          {lang === 'ar' ? 'قريباً' : 'SOON'}
-                        </span>
-                      )}
+                  }
+                };
+
+                const content = (
+                  <>
+                    <div className="icon-wrapper">
+                      {service.icon}
                     </div>
-                    <p className="card-desc">{service.desc}</p>
-                  </div>
-                </a>
-              ))}
+                    <div className="card-content">
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' }}>
+                        <h3 className="card-title">{service.title}</h3>
+                        {service.isSoon && (
+                          <span style={{ background: 'var(--accent)', color: 'white', fontSize: '0.7rem', fontWeight: 800, padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '0.5px', marginTop: '2px' }}>
+                            {lang === 'ar' ? 'قريباً' : 'SOON'}
+                          </span>
+                        )}
+                      </div>
+                      <p className="card-desc">{service.desc}</p>
+                    </div>
+                  </>
+                );
+
+                if (isInternal) {
+                  return (
+                    <Link href={service.href} {...linkProps}>
+                      {content}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <a
+                    href={service.href || '#'}
+                    target={service.href ? "_blank" : undefined}
+                    rel={service.href ? "noopener noreferrer" : undefined}
+                    {...linkProps}
+                  >
+                    {content}
+                  </a>
+                );
+              })}
             </div>
           </div>
         </section>
