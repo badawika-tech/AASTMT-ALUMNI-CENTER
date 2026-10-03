@@ -20,6 +20,9 @@ const Icons = {
   ),
   Phone: () => (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+  ),
+  Form: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
   )
 }
 
@@ -143,6 +146,16 @@ export default function TripsPage() {
                   >
                     <Icons.WhatsApp />
                   </a>
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLScMqGEjD5WDrHKb_IOdQBmHer4qNhzOjYLf0MMTo2CAhivx0Q/viewform?usp=header"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="trip-btn-details"
+                    style={{ padding: '12px 14px', background: '#4285F4', color: 'white', border: 'none' }}
+                    title={lang === 'ar' ? 'سجل عبر النموذج' : 'Register Form'}
+                  >
+                    <Icons.Form />
+                  </a>
                 </div>
               </div>
             </article>
@@ -162,6 +175,9 @@ export default function TripsPage() {
           <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
             <a href="tel:01024982244" className="trip-btn-phone">
               <Icons.Phone /> 01024982244 - 03/4204219
+            </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScMqGEjD5WDrHKb_IOdQBmHer4qNhzOjYLf0MMTo2CAhivx0Q/viewform?usp=header" target="_blank" rel="noopener noreferrer" className="trip-btn-details" style={{background: '#4285F4', color: 'white', border: 'none'}}>
+              <Icons.Form /> {lang === 'ar' ? 'سجل مباشرة في الاستمارة' : 'Register via Form'}
             </a>
             <a href="https://wa.me/201024982244" target="_blank" rel="noopener noreferrer" className="trip-btn-whatsapp">
               <Icons.WhatsApp /> WhatsApp (201024982244)
