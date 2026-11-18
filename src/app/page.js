@@ -378,7 +378,7 @@ const translations = {
         desc: 'Explore top-tier job openings, exclusive internships, and career resources.',
         icon: <Icons.Job />,
         className: 'span-6',
-        action: 'jobs'
+        href: '/jobs'
       },
       {
         title: 'Update Your Data',
@@ -448,7 +448,7 @@ const translations = {
         desc: 'اكتشف أفضل الوظائف المتاحة وفرص التدريب المهني.',
         icon: <Icons.Job />,
         className: 'span-6',
-        action: 'jobs'
+        href: '/jobs'
       },
       {
         title: 'تحديث بياناتك',
@@ -520,7 +520,7 @@ export default function Home() {
             {t.subtitle}
           </p>
           <div className="hero-actions justify-center">
-            <button onClick={() => setActiveModalKey('jobs')} className="cta-button" style={{ border: 'none' }}>{t.btnExplore}</button>
+            <Link href="/jobs" className="cta-button" style={{ border: 'none' }}>{t.btnExplore}</Link>
             <a href="/contact" className="cta-button cta-outline">{t.btnJoin}</a>
           </div>
         </section>
